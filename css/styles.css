@@ -1,0 +1,84 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    height: 100vh;
+}
+
+
+#player-1, #player-2 {
+    border: 2px solid blue;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-container {
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    padding: 2rem;
+}
+
+#board-section {
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+#board-container {
+    width: 60%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#board-container div {
+    aspect-ratio: 1/1;
+    border: 1px solid red;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+#toggle-container {
+    width: 80%;
+    border: 2px solid red;
+    padding: 1rem 3rem;
+    display: none;
+    justify-content: space-around;
+}
+
+.btn {
+    width: 5rem;
+    padding: 0.5rem 0;
+}
+
+
+
+
+
+.hidden {
+    display: none;
+}
