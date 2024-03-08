@@ -11,7 +11,6 @@ body{
     height: 100vh;
 }
 
-
 #player-1, #player-2 {
     border: 2px solid blue;
     width: 25%;
@@ -62,11 +61,9 @@ header {
     padding: 2rem;
 }
 
-#toggle-container {
-    width: 80%;
-    border: 2px solid red;
-    padding: 1rem 3rem;
+#btn-container2 {
     display: none;
+    width: 80%;
     justify-content: space-around;
 }
 
