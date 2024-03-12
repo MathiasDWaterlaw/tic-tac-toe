@@ -72,10 +72,32 @@ header {
     padding: 0.5rem 0;
 }
 
-.hidden {
-    display: none;
-}
 
 dialog {
     margin: auto auto;
+    width: 50vw;
+    height: 50vh;
+}
+
+#dialog-container {
+    width: 50%;
+    margin: 7vh auto;
+}
+
+dialog .input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog .input-container input {
+    margin-bottom: 1rem;
+}
+
+#dialog-buttons {
+    padding: 0;
+    justify-content: space-evenly;
+}
+
+.hidden {
+    display: none;
 }

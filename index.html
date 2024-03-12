@@ -67,11 +67,24 @@
 
     </body>
     <dialog id="dialog-section">
-        <div>
-            <input required type="text" name="player-1-name" id="input-player-1" placeholder="Player 1">
-            <input required type="text" name="player-2-name" id="input-player-2" placeholder="Player 2">
-            <button id="close-dialog" class="btn">Close</button>
-            <button id="confirm-players-name" class="btn">Confirm</button>
+
+        <div id="dialog-container">
+
+            <div class="input-container">
+                <label for="player-1-name">First player name: 
+                </label>
+                <input required type="text" name="player-1-name" id="input-player-1" placeholder="Player 1">
+                <label for="player-2-name">Second player name: 
+                </label>
+                <input required type="text" name="player-2-name" id="input-player-2" placeholder="Player 2">
+            </div>
+
+            <div class="button-container" id="dialog-buttons">
+                <button id="close-dialog" class="btn">Close</button>
+                <button id="confirm-players-name" class="btn">Confirm</button>
+            </div>
+
         </div>
+
     </dialog>
 </html>
