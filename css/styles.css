@@ -35,24 +35,6 @@ header {
     padding: 2rem;
 }
 
-#board-section {
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-#board-container {
-    width: 60%;
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-
-#board-container div {
-    aspect-ratio: 1/1;
-    border: 1px solid red;
-}
 
 .button-container {
     display: flex;
@@ -97,6 +79,50 @@ dialog .input-container input {
     padding: 0;
     justify-content: space-evenly;
 }
+
+
+/* board styling */
+
+#board-section {
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+#board-container {
+    width: 60%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#board-container .grid-box {
+    aspect-ratio: 1/1;
+    /* border: 1px solid red; */
+}
+
+#grid-1, #grid-2, #grid-3,
+#grid-4, #grid-5, #grid-6 {
+    border-bottom: 2px solid black;
+}
+
+#grid-4, #grid-5, #grid-6,
+#grid-7, #grid-8, #grid-9 {
+    border-top: 2px solid black;
+}
+
+#grid-1, #grid-4, #grid-7,
+#grid-2, #grid-5, #grid-8 {
+    border-right: 2px solid black;
+}
+
+#grid-2, #grid-5, #grid-8,
+#grid-3, #grid-6, #grid-9 {
+    border-left: 2px solid black;
+}
+
+/* ------------------------------- */
 
 .hidden {
     display: none;

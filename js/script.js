@@ -12,7 +12,19 @@ const secondPlayerName = document.getElementById('p2-name');
 const firstNameInput = document.getElementById('input-player-1');
 const secondNameInput = document.getElementById('input-player-2');
 
+function Player(name, symbol) {
+    this.name = name;
+    this.symbol = symbol;
+    this.active = false;
+}
 
+function startGame(playerNames){
+    const [firstPlayerName, secondPlayerName] = playerNames;
+    const firstPlayer = new Player(firstPlayerName, 'X');
+    const secondPlayer = new Player(secondPlayerName, 'O');
+
+    console.log(firstPlayer.name, firstPlayer.symbol)
+}
 
 
 startBtn.addEventListener('click', () => {
@@ -31,6 +43,7 @@ resetBtn.addEventListener('click', () => {
 confirmName.addEventListener('click', () => {
     firstPlayerName.textContent = firstNameInput.value;
     secondPlayerName.textContent = secondNameInput.value;
+    startGame([firstNameInput.value, secondNameInput.value]);
     dialog.close();
 });
 
