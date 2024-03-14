@@ -13,18 +13,10 @@ const secondNameInput = document.getElementById('input-player-2');
 
 const firstPlayerName = document.getElementById('p1-name');
 const secondPlayerName = document.getElementById('p2-name');
+const firstPlayerScore = document.getElementById('p1-score');
+const secondPlayerScore = document.getElementById('p2-score');
 
 const gridBoxes = document.querySelectorAll('.grid-box');
-// const grid2 = document.getElementById('grid-2');
-// const grid3 = document.getElementById('grid-3');
-// const grid4 = document.getElementById('grid-4');
-// const grid5 = document.getElementById('grid-5');
-// const grid6 = document.getElementById('grid-6');
-// const grid7 = document.getElementById('grid-7');
-// const grid8 = document.getElementById('grid-8');
-// const grid9 = document.getElementById('grid-9');
-
-// let excludedGridBoxes = [];
 
 function Player(name, symbol, result) {
     this.name = name;
@@ -90,28 +82,10 @@ const boardMatrix = [[
     }
 ]];
 
-
 function playGame(players){
+
     const [firstPlayer, secondPlayer] = players;
-
     firstPlayer.active = true;
-
-    // gridBoxes.forEach((box) => 
-    //     box.addEventListener('click', () => {
-
-    //         if (!excludedGridBoxes.includes(box.id) && firstPlayer.active) {
-    //             box.innerHTML = `<h1>${firstPlayer.symbol}</h1>`;
-    //             firstPlayer.active = false;
-    //             secondPlayer.active = true;
-                
-    //         } else if (!excludedGridBoxes.includes(box.id) && secondPlayer.active) {
-    //             box.innerHTML = `<h1>${secondPlayer.symbol}</h1>`;
-    //             firstPlayer.active = true;
-    //             secondPlayer.active = false;
-    //         }
-    //         excludedGridBoxes.push(box.id);
-    //     })
-    // );
 
     boardMatrix.forEach((el) => {
         el.forEach((object) => {
@@ -120,19 +94,22 @@ function playGame(players){
                 if(object.active && firstPlayer.active) {
                     object.gridBox.innerHTML = `<h1>${firstPlayer.symbol}</h1>`;
                     object.active = false;
+                    object.value = 1;
+
                     firstPlayer.active = false;
                     secondPlayer.active = true;
-                    object.value = 1;
 
                 } else if (object.active && secondPlayer.active) {
                     object.gridBox.innerHTML = `<h1>${secondPlayer.symbol}</h1>`;
                     object.active = false;
+                    object.value = 0;
+
                     firstPlayer.active = true;
                     secondPlayer.active = false;
-                    object.value = 0;
                 }
 
                 checkWinner();
+                refreshHighscore();
             });
         })
     })
@@ -143,9 +120,11 @@ function checkWinner() {
     const controllMatrix = (matrix) => {
         matrix.forEach((line) => {
             if (line[0].value + line[1].value + line[2].value === 3) {
+                firstPlayer.highscore += 1;
                 alert('first Player (x) won!');
                 clearBoard();
             } else if (line[0].value + line[1].value + line[2].value === 0) {
+                secondPlayer.highscore += 1;
                 alert('second Player (o)  won!');
                 clearBoard();
             }
@@ -161,14 +140,29 @@ function checkWinner() {
     const diagonal2 = [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]];
     const allDiagonals = [diagonal1, diagonal2];
     
+    const drawNumber = boardMatrix.reduce((acc, line)=>{
+        acc = acc + line[0].value + line[1].value + line[2].value;
+        return acc;
+    }, 0);
+
     controllMatrix(boardMatrix);
     controllMatrix(allColumns);
     controllMatrix(allDiagonals);
+
+    if (drawNumber === 5 || drawNumber === 4) {
+        alert('its a draw!');
+        clearBoard();
+    }
+
 }
 
+function refreshHighscore() {
+    firstPlayerScore.innerHTML = `<p>${firstPlayer.highscore}</p>`;
+    secondPlayerScore.innerHTML = `<p>${secondPlayer.highscore}</p>`;
+}
 
 function clearBoard() {
-    // gridBoxes.forEach((box) => box.innerHTML = '');
+
     boardMatrix.forEach((el) => {
         el.forEach((object) => {
             object.gridBox.innerHTML = '';
@@ -176,18 +170,22 @@ function clearBoard() {
             object.value = NaN;
         })
     })
-    // excludedGridBoxes = [];
-    firstPlayer.active = true;
+    // firstPlayer.active = true;
 }
 
 function reset() {
     clearBoard();
     firstPlayerName.textContent = 'Player 1';
     secondPlayerName.textContent = 'Player 2';
+
     btnContainer.style.display = 'none';
     startBtn.classList.toggle('hidden');
     firstPlayer.active = false;
     secondPlayer.active = false;
+
+    firstPlayer.highscore = 0;
+    secondPlayer.highscore = 0;
+    refreshHighscore();
 }
 
 // buttons listeners and functions
@@ -198,17 +196,18 @@ startBtn.addEventListener('click', () => {
     dialog.showModal();
 });
 
-restartBtn.addEventListener('click', () => {
-    clearBoard();
-})
-
-resetBtn.addEventListener('click', () => {
-    reset();
-});
-
 confirmName.addEventListener('click', () => {
-    firstPlayerName.textContent = firstNameInput.value;
-    secondPlayerName.textContent = secondNameInput.value;
+    if (firstNameInput.value === '') {
+        firstPlayerName.textContent = 'Player 1';
+    } else {
+        firstPlayerName.textContent = firstNameInput.value;
+    }
+    
+    if (secondNameInput.value === '') {
+        secondPlayerName.textContent = 'Player 2';
+    } else {
+        secondPlayerName.textContent = secondNameInput.value;
+    }
     firstPlayer.name = firstNameInput.value;
     secondPlayer.name = secondNameInput.value;
     dialog.close();
@@ -217,4 +216,12 @@ confirmName.addEventListener('click', () => {
 
 closeDialog.addEventListener('click', () => {
     dialog.close()
+});
+
+restartBtn.addEventListener('click', () => {
+    clearBoard();
+})
+
+resetBtn.addEventListener('click', () => {
+    reset();
 });
