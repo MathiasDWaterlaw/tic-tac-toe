@@ -16,67 +16,71 @@ const secondPlayerName = document.getElementById('p2-name');
 const firstPlayerScore = document.getElementById('p1-score');
 const secondPlayerScore = document.getElementById('p2-score');
 
-const gridBoxes = document.querySelectorAll('.grid-box');
+const winDialog = document.getElementById('win-dialog');
+const winDialContainer = document.getElementById('win-d-container');
+const continueGame = document.getElementById('continue-game');
+const secondBtnReset = document.getElementById('second-reset');
 
-function Player(name, symbol, result) {
-    this.name = name;
-    this.symbol = symbol;
-    this.result = result;
-    this.active = false;
-    this.highscore = 0;
+class Player {
+    constructor(name, symbol) {
+        this.name = name;
+        this.symbol = symbol;
+        this.active = false;
+        this.highscore = 0;
+    }
 }
 
-const firstPlayer = new Player('Player 1', 'X', 3);
-const secondPlayer = new Player('Player 2', 'O', 0);
+const firstPlayer = new Player('Player 1', 'X');
+const secondPlayer = new Player('Player 2', 'O');
 
 const boardMatrix = [[
     {
         gridBox: document.getElementById('grid-1'),
-        position: 1,
+        // position: 1,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-2'),
-        position: 2,
+        // position: 2,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-3'),
-        position: 3,
+        // position: 3,
         value: NaN,
         active: true
     }
 ],[
     {
         gridBox: document.getElementById('grid-4'),
-        position: 4,
+        // position: 4,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-5'),
-        position: 5,
+        // position: 5,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-6'),
-        position: 6,
+        // position: 6,
         value: NaN,
         active: true
     }
 ],[
     {
         gridBox: document.getElementById('grid-7'),
-        position: 7,
+        // position: 7,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-8'),
-        position: 8,
+        // position: 8,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-9'),
-        position: 9,
+        // position: 9,
         value: NaN,
         active: true
     }
@@ -115,44 +119,48 @@ function playGame(players){
     })
 }
 
+function showWinner(string) {
+    winDialContainer.innerHTML = `<h2>${string}</h2>`;
+    winDialog.showModal();
+}
+
 function checkWinner() {
 
     const controllMatrix = (matrix) => {
+        
         matrix.forEach((line) => {
             if (line[0].value + line[1].value + line[2].value === 3) {
                 firstPlayer.highscore += 1;
-                alert('first Player (x) won!');
+                showWinner(`${firstPlayer.name} won!`);
                 clearBoard();
+
             } else if (line[0].value + line[1].value + line[2].value === 0) {
                 secondPlayer.highscore += 1;
-                alert('second Player (o)  won!');
+                showWinner(`${secondPlayer.name} won!`);
                 clearBoard();
             }
-        })
-    }
 
-    const column1 = [boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]];
-    const column2 = [boardMatrix[0][1], boardMatrix[1][1], boardMatrix[2][1]];
-    const column3 = [boardMatrix[0][2], boardMatrix[1][2], boardMatrix[2][2]];
-    const allColumns = [column1, column2, column3];
-    
-    const diagonal1 = [boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]];
-    const diagonal2 = [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]];
-    const allDiagonals = [diagonal1, diagonal2];
-    
-    const drawNumber = boardMatrix.reduce((acc, line)=>{
-        acc = acc + line[0].value + line[1].value + line[2].value;
-        return acc;
-    }, 0);
+        });
+        
+        }
+        
+        const column1 = [boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]];
+        const column2 = [boardMatrix[0][1], boardMatrix[1][1], boardMatrix[2][1]];
+        const column3 = [boardMatrix[0][2], boardMatrix[1][2], boardMatrix[2][2]];
+        const allColumns = [column1, column2, column3];
+        
+        const diagonal1 = [boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]];
+        const diagonal2 = [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]];
+        const allDiagonals = [diagonal1, diagonal2];
+        
+        // const drawNumber = boardMatrix.reduce((acc, line)=>{
+        //     acc = acc + line[0].value + line[1].value + line[2].value;
+        //     return acc;
+        // }, 0);
 
     controllMatrix(boardMatrix);
     controllMatrix(allColumns);
     controllMatrix(allDiagonals);
-
-    if (drawNumber === 5 || drawNumber === 4) {
-        alert('its a draw!');
-        clearBoard();
-    }
 
 }
 
@@ -191,31 +199,34 @@ function reset() {
 // buttons listeners and functions
 
 startBtn.addEventListener('click', () => {
-    btnContainer.style.display = 'flex';
-    startBtn.classList.toggle('hidden');
     dialog.showModal();
 });
 
 confirmName.addEventListener('click', () => {
+    
     if (firstNameInput.value === '') {
         firstPlayerName.textContent = 'Player 1';
+        
     } else {
         firstPlayerName.textContent = firstNameInput.value;
-    }
-    
+    }  
     if (secondNameInput.value === '') {
         secondPlayerName.textContent = 'Player 2';
+        
     } else {
         secondPlayerName.textContent = secondNameInput.value;
     }
-    firstPlayer.name = firstNameInput.value;
-    secondPlayer.name = secondNameInput.value;
+    
+    firstPlayer.name = firstPlayerName.textContent;
+    secondPlayer.name = secondPlayerName.textContent;
     dialog.close();
+    btnContainer.style.display = 'flex';
+    startBtn.classList.toggle('hidden');
     playGame([firstPlayer, secondPlayer]);
 });
 
 closeDialog.addEventListener('click', () => {
-    dialog.close()
+    dialog.close();
 });
 
 restartBtn.addEventListener('click', () => {
@@ -224,4 +235,14 @@ restartBtn.addEventListener('click', () => {
 
 resetBtn.addEventListener('click', () => {
     reset();
+});
+
+continueGame.addEventListener('click', () => {
+    winDialog.close();
+});
+
+secondBtnReset.addEventListener('click', () => {
+    clearBoard();
+    reset();
+    winDialog.close();
 });

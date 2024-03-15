@@ -61,7 +61,7 @@ dialog {
     height: 50vh;
 }
 
-#dialog-container {
+.dialog-container {
     width: 50%;
     margin: 7vh auto;
 }
@@ -75,7 +75,7 @@ dialog .input-container input {
     margin-bottom: 1rem;
 }
 
-#dialog-buttons {
+#dialog-buttons, #win-d-btns {
     padding: 0;
     justify-content: space-evenly;
 }

@@ -23,7 +23,6 @@
         </section>
 
         <main>
-
             <div id="main-container" class="container">
               
                 <header><h1>Tic Tac Toe</h1></header>
@@ -46,11 +45,11 @@
                     <button id="start-btn" class="btn">START</button>
 
                     <div id="btn-container2" class="">
-                        <button id="restart-btn" class="btn">Restart</button><button id="reset-btn" class="btn">Reset</button>
+                        <button id="restart-btn" class="btn">Restart</button>
+                        <button id="reset-btn" class="btn">Reset</button>
                     </div>
                 </div>
             </div>
-
         </main>
 
         <section id="player-2">
@@ -68,7 +67,7 @@
     </body>
 
     <dialog id="dialog-section">
-        <div id="dialog-container">
+        <div class="dialog-container">
 
             <div class="input-container">
                 <label for="player-1-name">First player name: 
@@ -84,6 +83,15 @@
                 <button id="confirm-players-name" class="btn">Confirm</button>
             </div>
 
+        </div>
+    </dialog>
+
+    <dialog id="win-dialog">
+        <div class="dialog-container" id="win-d-container"></div>
+
+        <div class="button-container" id="win-d-btns">
+            <button class="btn" id="continue-game">Continue</button>
+            <button class="btn" id="second-reset">Reset</button>
         </div>
     </dialog>
 </html>
