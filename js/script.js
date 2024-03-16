@@ -27,6 +27,7 @@ class Player {
         this.symbol = symbol;
         this.active = false;
         this.highscore = 0;
+        this.winner = false;
     }
 }
 
@@ -126,11 +127,28 @@ function showWinner(string) {
 
 function checkWinner() {
 
+    const checkDraw = () => {
+        
+        const drawNumber = boardMatrix.reduce((acc, line)=>{
+            acc = acc + line[0].value + line[1].value + line[2].value;
+            return acc;
+        }, 0);
+
+        if (!firstPlayer.winner && !secondPlayer.winner){
+
+            if(drawNumber === 4 || drawNumber === 5) {
+                showWinner("It's draw!");
+            }
+        }
+
+    }
+
     const controllMatrix = (matrix) => {
         
         matrix.forEach((line) => {
             if (line[0].value + line[1].value + line[2].value === 3) {
                 firstPlayer.highscore += 1;
+                firstPlayer.winner = true;
                 showWinner(`${firstPlayer.name} won!`);
                 clearBoard();
 
@@ -143,24 +161,20 @@ function checkWinner() {
         });
         
         }
-        
-        const column1 = [boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]];
-        const column2 = [boardMatrix[0][1], boardMatrix[1][1], boardMatrix[2][1]];
-        const column3 = [boardMatrix[0][2], boardMatrix[1][2], boardMatrix[2][2]];
-        const allColumns = [column1, column2, column3];
+                
+        const allColumns = [[boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]],
+                            [boardMatrix[0][1], boardMatrix[1][1], boardMatrix[2][1]],
+                            [boardMatrix[0][2], boardMatrix[1][2], boardMatrix[2][2]]];
         
         const diagonal1 = [boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]];
         const diagonal2 = [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]];
         const allDiagonals = [diagonal1, diagonal2];
         
-        // const drawNumber = boardMatrix.reduce((acc, line)=>{
-        //     acc = acc + line[0].value + line[1].value + line[2].value;
-        //     return acc;
-        // }, 0);
 
     controllMatrix(boardMatrix);
     controllMatrix(allColumns);
     controllMatrix(allDiagonals);
+    checkDraw();
 
 }
 
@@ -178,7 +192,9 @@ function clearBoard() {
             object.value = NaN;
         })
     })
-    // firstPlayer.active = true;
+    
+    firstPlayer.winner = false;
+    secondPlayer.winner = false;
 }
 
 function reset() {

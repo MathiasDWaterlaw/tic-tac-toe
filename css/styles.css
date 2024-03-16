@@ -94,8 +94,8 @@ dialog .input-container input {
 #board-container {
     width: 60%;
     display: grid;
-    grid-template-columns: repeat(3, 33fr);
-    grid-template-rows: repeat(3, 33fr);
+    grid-template-columns: repeat(3, 33.33fr);
+    grid-template-rows: repeat(3, 33.33fr);
 }
 
 #board-container .grid-box {
