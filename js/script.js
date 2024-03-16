@@ -31,8 +31,8 @@ class Player {
     }
 }
 
-const firstPlayer = new Player('Player 1', 'X');
-const secondPlayer = new Player('Player 2', 'O');
+const firstPlayer = new Player('Player 1', './images/cross-svgrepo-com.svg');
+const secondPlayer = new Player('Player 2', './images/circle-svgrepo-com.svg');
 
 const boardMatrix = [[
     {
@@ -97,7 +97,7 @@ function playGame(players){
             object.gridBox.addEventListener('click', () => {
 
                 if(object.active && firstPlayer.active) {
-                    object.gridBox.innerHTML = `<h1>${firstPlayer.symbol}</h1>`;
+                    object.gridBox.innerHTML = `<img src="${firstPlayer.symbol}"/>`;
                     object.active = false;
                     object.value = 1;
 
@@ -105,7 +105,7 @@ function playGame(players){
                     secondPlayer.active = true;
 
                 } else if (object.active && secondPlayer.active) {
-                    object.gridBox.innerHTML = `<h1>${secondPlayer.symbol}</h1>`;
+                    object.gridBox.innerHTML = `<img src="${secondPlayer.symbol}"/>`;
                     object.active = false;
                     object.value = 0;
 
@@ -116,8 +116,8 @@ function playGame(players){
                 checkWinner();
                 refreshHighscore();
             });
-        })
-    })
+        });
+    });
 }
 
 function showWinner(string) {
@@ -138,6 +138,7 @@ function checkWinner() {
 
             if(drawNumber === 4 || drawNumber === 5) {
                 showWinner("It's draw!");
+                clearBoard();
             }
         }
 
@@ -165,10 +166,9 @@ function checkWinner() {
         const allColumns = [[boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]],
                             [boardMatrix[0][1], boardMatrix[1][1], boardMatrix[2][1]],
                             [boardMatrix[0][2], boardMatrix[1][2], boardMatrix[2][2]]];
-        
-        const diagonal1 = [boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]];
-        const diagonal2 = [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]];
-        const allDiagonals = [diagonal1, diagonal2];
+
+        const allDiagonals = [[boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]],
+                            [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]]];
         
 
     controllMatrix(boardMatrix);
@@ -192,7 +192,6 @@ function clearBoard() {
             object.value = NaN;
         })
     })
-    
     firstPlayer.winner = false;
     secondPlayer.winner = false;
 }
