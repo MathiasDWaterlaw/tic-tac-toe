@@ -37,51 +37,42 @@ const secondPlayer = new Player('Player 2', './images/circle-svgrepo-com.svg');
 const boardMatrix = [[
     {
         gridBox: document.getElementById('grid-1'),
-        // position: 1,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-2'),
-        // position: 2,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-3'),
-        // position: 3,
         value: NaN,
         active: true
     }
 ],[
     {
         gridBox: document.getElementById('grid-4'),
-        // position: 4,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-5'),
-        // position: 5,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-6'),
-        // position: 6,
         value: NaN,
         active: true
     }
 ],[
     {
         gridBox: document.getElementById('grid-7'),
-        // position: 7,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-8'),
-        // position: 8,
         value: NaN,
         active: true
     },{
         gridBox: document.getElementById('grid-9'),
-        // position: 9,
         value: NaN,
         active: true
     }
@@ -163,11 +154,13 @@ function checkWinner() {
         
         }
                 
-        const allColumns = [[boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]],
+        const allColumns = [
+                            [boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]],
                             [boardMatrix[0][1], boardMatrix[1][1], boardMatrix[2][1]],
                             [boardMatrix[0][2], boardMatrix[1][2], boardMatrix[2][2]]];
 
-        const allDiagonals = [[boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]],
+        const allDiagonals = [
+                            [boardMatrix[0][0], boardMatrix[1][1], boardMatrix[2][2]],
                             [boardMatrix[0][2], boardMatrix[1][1], boardMatrix[2][0]]];
         
 
@@ -191,7 +184,7 @@ function clearBoard() {
             object.active = true;
             object.value = NaN;
         })
-    })
+    });
     firstPlayer.winner = false;
     secondPlayer.winner = false;
 }
@@ -253,11 +246,11 @@ resetBtn.addEventListener('click', () => {
 });
 
 continueGame.addEventListener('click', () => {
+    clearBoard();
     winDialog.close();
 });
 
 secondBtnReset.addEventListener('click', () => {
-    clearBoard();
     reset();
     winDialog.close();
 });
