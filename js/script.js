@@ -11,6 +11,9 @@ const closeDialog = document.getElementById('close-dialog');
 const firstNameInput = document.getElementById('input-player-1');
 const secondNameInput = document.getElementById('input-player-2');
 
+const player1Card = document.getElementById('p1-card');
+const player2Card = document.getElementById('p2-card');
+
 const firstPlayerName = document.getElementById('p1-name');
 const secondPlayerName = document.getElementById('p2-name');
 const firstPlayerScore = document.getElementById('p1-score');
@@ -82,7 +85,7 @@ function playGame(players){
 
     const [firstPlayer, secondPlayer] = players;
     firstPlayer.active = true;
-
+    refreshTurn();
     boardMatrix.forEach((el) => {
         el.forEach((object) => {
             object.gridBox.addEventListener('click', () => {
@@ -105,10 +108,27 @@ function playGame(players){
                 }
 
                 checkWinner();
+                refreshTurn();
                 refreshHighscore();
             });
         });
     });
+}
+
+function refreshTurn() {
+    if (firstPlayer.active) {
+        player1Card.style.border = '3px solid #07bed6';
+        player2Card.style.border = '3px solid var(--transparent)';
+    } else {
+        player1Card.style.border = '3px solid var(--transparent)';
+    }
+    
+    if (secondPlayer.active) {
+        player2Card.style.border = '3px solid #C43D27';
+        player1Card.style.border = '3px solid var(--transparent)'
+    } else {
+        player2Card.style.border = '3px solid var(--transparent)'
+    }
 }
 
 function showWinner(string) {
@@ -128,8 +148,8 @@ function checkWinner() {
         if (!firstPlayer.winner && !secondPlayer.winner){
 
             if(drawNumber === 4 || drawNumber === 5) {
-                showWinner("It's draw!");
                 clearBoard();
+                showWinner("It's draw!");
             }
         }
 
@@ -141,13 +161,16 @@ function checkWinner() {
             if (line[0].value + line[1].value + line[2].value === 3) {
                 firstPlayer.highscore += 1;
                 firstPlayer.winner = true;
-                showWinner(`${firstPlayer.name} won!`);
+                secondPlayer.winner = false;
                 clearBoard();
+                showWinner(`${firstPlayer.name} won!`);
 
             } else if (line[0].value + line[1].value + line[2].value === 0) {
                 secondPlayer.highscore += 1;
-                showWinner(`${secondPlayer.name} won!`);
+                secondPlayer.winner = true;
+                firstPlayer.winner = false;
                 clearBoard();
+                showWinner(`${secondPlayer.name} won!`);
             }
 
         });
@@ -183,25 +206,15 @@ function clearBoard() {
             object.gridBox.innerHTML = '';
             object.active = true;
             object.value = NaN;
-        })
+        });
     });
+
     firstPlayer.winner = false;
     secondPlayer.winner = false;
 }
 
 function reset() {
-    clearBoard();
-    firstPlayerName.textContent = 'Player 1';
-    secondPlayerName.textContent = 'Player 2';
-
-    btnContainer.style.display = 'none';
-    startBtn.classList.toggle('hidden');
-    firstPlayer.active = false;
-    secondPlayer.active = false;
-
-    firstPlayer.highscore = 0;
-    secondPlayer.highscore = 0;
-    refreshHighscore();
+    window.location.reload();
 }
 
 // buttons listeners and functions

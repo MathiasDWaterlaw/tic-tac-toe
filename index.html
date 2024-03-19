@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="./css/styles.css">
         <script defer src="./js/script.js"></script>
@@ -13,11 +16,12 @@
         <section id="player-1">
             <div class="player-section-container">
 
-                <div class="player-card">
+                <div class="player-card" id="p1-card">
+                    <div id="p1-logo"><img src="./images/cross-svgrepo-com.svg" alt="cross"></div>
                     <h3 id="p1-name">Player 1</h3>
-                    <div id="p1-logo">X</div>
                 </div>
-                <div id="p1-score" class="score-container">0</div>
+
+                <div id="p1-score" class="score-container"><p>0</p></div>
 
             </div>
         </section>
@@ -55,11 +59,11 @@
         <section id="player-2">
             <div class="player-section-container">
 
-                <div class="player-card">
+                <div class="player-card" id="p2-card">
+                    <div id="p2-logo"><img src="./images/circle-svgrepo-com.svg" alt="circle"></div>
                     <h3 id="p2-name">Player 2</h3>
-                    <div id="p2-logo">O</div>
                 </div>
-                <div id="p2-score" class="score-container">0</div>
+                <div id="p2-score" class="score-container"><p>0</p></div>
                 
             </div>
         </section>
@@ -70,12 +74,27 @@
         <div class="dialog-container">
 
             <div class="input-container">
-                <label for="player-1-name">First player name: 
+                <label for="input-player-1">First player name: 
                 </label>
                 <input required type="text" name="player-1-name" id="input-player-1" placeholder="Player 1">
-                <label for="player-2-name">Second player name: 
+
+                <!-- <div class="radio-container">
+                    <label for="x-radio-player-1">X</label>
+                    <input type="radio" name="p1-radio" id="x-radio-player-1" class="radio" value="X" checked>
+                    <label for="o-radio-player-2">O</label>
+                    <input type="radio" name="p1-radio" id="o-radio-player-1" class="radio" value="O">
+                </div> -->
+
+                <label for="input-player-2">Second player name: 
                 </label>
                 <input required type="text" name="player-2-name" id="input-player-2" placeholder="Player 2">
+<!-- 
+                <div class="radio-container">
+                    <label for="x-radio-player-2">X</label>
+                    <input type="radio" name="p2-radio" id="x-radio-player-2" class="radio" value="X">
+                    <label for="o-radio-player-2">O</label>
+                    <input type="radio" name="p2-radio" id="o-radio-player-2" class="radio" value="O" checked>
+                </div> -->
             </div>
 
             <div class="button-container" id="dialog-buttons">

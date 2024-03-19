@@ -1,3 +1,11 @@
+:root {
+    --transparent: hsla(0, 0%, 100%, 0);
+    --board-color: #b2af9a;
+    --main-black: #222222;
+    --main-white: #FFF7F8;
+
+}
+
 *,
 *::after,
 *::before {
@@ -9,14 +17,49 @@
 body{
     display: flex;
     height: 100vh;
+    font-family: 'Public Sans', sans-serif;
+    background-color: var(--main-white);
+    color: var(--main-black);
 }
 
 #player-1, #player-2 {
-    border: 2px solid blue;
     width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.player-section-container {
+    border: 3px solid var(--main-black);
+    border-radius: 13.5px;
+    padding: 1rem;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border: 3px solid var(--transparent);
+    border-radius: 10px;
+    padding: 0.7rem;
+}
+
+.player-card img {
+    width: 30px;
+    aspect-ratio: 1/1;
+    margin: 0;
+    padding: 0;
+}
+
+.player-card h3 {
+    margin-bottom: 2.5px;
+}
+
+.score-container {
+    margin-top: 4rem;
+    text-align: center;
+    padding: 1rem;
+    font-size: 7rem;
 }
 
 main {
@@ -32,6 +75,7 @@ main {
 
 header {
     text-align: center;
+    margin-top: 1rem;
     padding: 2rem;
 }
 
@@ -40,7 +84,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 #btn-container2 {
@@ -59,6 +103,8 @@ dialog {
     margin: auto auto;
     width: 50vw;
     height: 50vh;
+    color: var(--main-black);
+    background-color: var(--main-white);
 }
 
 .dialog-container {
@@ -84,11 +130,11 @@ dialog .input-container input {
 /* board styling */
 
 #board-section {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 #board-container {
@@ -113,22 +159,22 @@ dialog .input-container input {
 
 #grid-1, #grid-2, #grid-3,
 #grid-4, #grid-5, #grid-6 {
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid var(--board-color);
 }
 
 #grid-4, #grid-5, #grid-6,
 #grid-7, #grid-8, #grid-9 {
-    border-top: 5px solid black;
+    border-top: 5px solid var(--board-color);
 }
 
 #grid-1, #grid-4, #grid-7,
 #grid-2, #grid-5, #grid-8 {
-    border-right: 5px solid black;
+    border-right: 5px solid var(--board-color);
 }
 
 #grid-2, #grid-5, #grid-8,
 #grid-3, #grid-6, #grid-9 {
-    border-left: 5px solid black;
+    border-left: 5px solid var(--board-color);
 }
 
 /* ------------------------------- */
