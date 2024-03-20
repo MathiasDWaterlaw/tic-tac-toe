@@ -9,12 +9,14 @@
 
         <link rel="stylesheet" href="./css/styles.css">
         <script defer src="./js/script.js"></script>
+
+        <link rel="shortcut icon" href="./images/favivon.svg" type="image/x-icon" sizes="32x32">
         <title>Tic Tac Toe</title>
     </head>
 
     <body>
         <section id="player-1">
-            <div class="player-section-container">
+            <div class="player-section-container" id="player1-container">
 
                 <div class="player-card" id="p1-card">
                     <div id="p1-logo"><img src="./images/cross-svgrepo-com.svg" alt="cross"></div>
@@ -29,7 +31,7 @@
         <main>
             <div id="main-container" class="container">
               
-                <header><h1>Tic Tac Toe</h1></header>
+                <header><h1>Tic Ta<span class="red">c</span> To<span class="blue">e</span></h1></header>
                 
                 <section id="board-section">
                     <div id="board-container">
@@ -46,18 +48,18 @@
                 </section>
                 
                 <div class="button-container">
-                    <button id="start-btn" class="btn">START</button>
+                    <button id="start-btn" class="btn blue">START</button>
 
                     <div id="btn-container2" class="">
-                        <button id="restart-btn" class="btn">Restart</button>
-                        <button id="reset-btn" class="btn">Reset</button>
+                        <button id="reset-btn" class="btn red">Reset</button>
+                        <button id="restart-btn" class="btn blue">Clear</button>
                     </div>
                 </div>
             </div>
         </main>
 
         <section id="player-2">
-            <div class="player-section-container">
+            <div class="player-section-container" id="player2-container">
 
                 <div class="player-card" id="p2-card">
                     <div id="p2-logo"><img src="./images/circle-svgrepo-com.svg" alt="circle"></div>
@@ -76,30 +78,16 @@
             <div class="input-container">
                 <label for="input-player-1">First player name: 
                 </label>
-                <input required type="text" name="player-1-name" id="input-player-1" placeholder="Player 1">
-
-                <!-- <div class="radio-container">
-                    <label for="x-radio-player-1">X</label>
-                    <input type="radio" name="p1-radio" id="x-radio-player-1" class="radio" value="X" checked>
-                    <label for="o-radio-player-2">O</label>
-                    <input type="radio" name="p1-radio" id="o-radio-player-1" class="radio" value="O">
-                </div> -->
+                <input required type="text" name="player-1-name" id="input-player-1" placeholder="Player 1" class="red">
 
                 <label for="input-player-2">Second player name: 
                 </label>
-                <input required type="text" name="player-2-name" id="input-player-2" placeholder="Player 2">
-<!-- 
-                <div class="radio-container">
-                    <label for="x-radio-player-2">X</label>
-                    <input type="radio" name="p2-radio" id="x-radio-player-2" class="radio" value="X">
-                    <label for="o-radio-player-2">O</label>
-                    <input type="radio" name="p2-radio" id="o-radio-player-2" class="radio" value="O" checked>
-                </div> -->
+                <input required type="text" name="player-2-name" id="input-player-2" placeholder="Player 2" class="blue">
             </div>
 
             <div class="button-container" id="dialog-buttons">
-                <button id="close-dialog" class="btn">Close</button>
-                <button id="confirm-players-name" class="btn">Confirm</button>
+                <button id="close-dialog" class="btn red">Close</button>
+                <button id="confirm-players-name" class="btn blue">Confirm</button>
             </div>
 
         </div>
@@ -109,8 +97,8 @@
         <div class="dialog-container" id="win-d-container"></div>
 
         <div class="button-container" id="win-d-btns">
-            <button class="btn" id="continue-game">Continue</button>
-            <button class="btn" id="second-reset">Reset</button>
+            <button class="btn red" id="second-reset">Reset</button>
+            <button class="btn blue" id="continue-game">Continue</button>
         </div>
     </dialog>
 </html>

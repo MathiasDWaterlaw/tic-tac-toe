@@ -3,7 +3,9 @@
     --board-color: #b2af9a;
     --main-black: #222222;
     --main-white: #FFF7F8;
-
+    --green: #8DE969;
+    --red: #c43d27;
+    --blue: #047B8B;
 }
 
 *,
@@ -22,6 +24,8 @@ body{
     color: var(--main-black);
 }
 
+/* right-left player section */
+
 #player-1, #player-2 {
     width: 25%;
     display: flex;
@@ -33,26 +37,27 @@ body{
     border: 3px solid var(--main-black);
     border-radius: 13.5px;
     padding: 1rem;
+    background-color: var(--main-white);
 }
 
 .player-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 2rem;
-    border: 3px solid var(--transparent);
-    border-radius: 10px;
-    padding: 0.7rem;
+    padding: 0.5rem 2.5rem;
+    margin-top: 0.5rem;
 }
 
 .player-card img {
-    width: 30px;
+    width: 105px;
     aspect-ratio: 1/1;
     margin: 0;
-    padding: 0;
+    padding: 1rem;
 }
 
 .player-card h3 {
-    margin-bottom: 2.5px;
+    font-size: 1.7rem;
 }
 
 .score-container {
@@ -61,6 +66,8 @@ body{
     padding: 1rem;
     font-size: 7rem;
 }
+
+/* ----------------------------- */
 
 main {
     width: 50%;
@@ -75,10 +82,9 @@ main {
 
 header {
     text-align: center;
-    margin-top: 1rem;
-    padding: 2rem;
+    margin: 1rem;
+    font-size: 1.5rem;
 }
-
 
 .button-container {
     display: flex;
@@ -96,8 +102,15 @@ header {
 .btn {
     width: 5rem;
     padding: 0.5rem 0;
+    border: 2px solid;
+    font-weight: 400;
+    background-color: var(--main-white);
+    border-radius: 5px;
 }
 
+.btn:hover {
+    font-weight: 700;
+}
 
 dialog {
     margin: auto auto;
@@ -105,6 +118,8 @@ dialog {
     height: 50vh;
     color: var(--main-black);
     background-color: var(--main-white);
+    border: 3px solid var(--main-black);
+    border-radius: 13.5px;
 }
 
 .dialog-container {
@@ -115,22 +130,75 @@ dialog {
 dialog .input-container {
     display: flex;
     flex-direction: column;
-}
-
-dialog .input-container input {
     margin-bottom: 1rem;
 }
 
-#dialog-buttons, #win-d-btns {
+dialog .input-container input {
+    margin: 0.5rem 0 1rem 0;
+    padding: 0.5rem;
+    border: 2px solid ;
+    border-radius: 10px;
+    background-color: var(--main-white);
+}
+
+dialog .input-container input:focus{
+    outline: 1.5px solid;
+}
+
+dialog .input-container input:-webkit-autofill,
+dialog .input-container input:-webkit-autofill:hover,
+dialog .input-container input:-webkit-autofill:focus,
+dialog .input-container input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;  
+}
+
+#dialog-buttons {
+    justify-content: space-between;
+    padding: 0;
+}
+
+#win-d-container {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+}
+
+#win-d-btns {
     padding: 0;
     justify-content: space-evenly;
 }
 
+input.red:-webkit-autofill,
+input.red:-webkit-autofill:hover,
+input.red:-webkit-autofill:focus,
+input.red:-webkit-autofill:active{
+    outline: 1.5px;
+    border: 2px solid var(--red);
+    -webkit-text-fill-color: var(--red);
+}
+
+input.blue:-webkit-autofill,
+input.blue:-webkit-autofill:hover,
+input.blue:-webkit-autofill:focus,
+input.blue:-webkit-autofill:active{
+    outline: 1.5px;
+    border: 2px solid var(--blue);
+    -webkit-text-fill-color: var(--blue);
+}
+
+.red {
+    border-color: var(--red);
+    color: var(--red)
+}
+.blue {
+    border-color: var(--blue);
+    color: var(--blue)
+}
 
 /* board styling */
 
 #board-section {
-    /* border: 2px solid black; */
     display: flex;
     align-items: center;
     justify-content: center;

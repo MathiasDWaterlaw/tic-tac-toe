@@ -11,8 +11,8 @@ const closeDialog = document.getElementById('close-dialog');
 const firstNameInput = document.getElementById('input-player-1');
 const secondNameInput = document.getElementById('input-player-2');
 
-const player1Card = document.getElementById('p1-card');
-const player2Card = document.getElementById('p2-card');
+const firstPlayerSection = document.getElementById('player-1');
+const secondPlayerSection = document.getElementById('player-2');
 
 const firstPlayerName = document.getElementById('p1-name');
 const secondPlayerName = document.getElementById('p2-name');
@@ -23,6 +23,8 @@ const winDialog = document.getElementById('win-dialog');
 const winDialContainer = document.getElementById('win-d-container');
 const continueGame = document.getElementById('continue-game');
 const secondBtnReset = document.getElementById('second-reset');
+
+const green = '#A1EC83';
 
 class Player {
     constructor(name, symbol) {
@@ -86,23 +88,24 @@ function playGame(players){
     const [firstPlayer, secondPlayer] = players;
     firstPlayer.active = true;
     refreshTurn();
+
     boardMatrix.forEach((el) => {
         el.forEach((object) => {
             object.gridBox.addEventListener('click', () => {
 
                 if(object.active && firstPlayer.active) {
+
                     object.gridBox.innerHTML = `<img src="${firstPlayer.symbol}"/>`;
                     object.active = false;
                     object.value = 1;
-
                     firstPlayer.active = false;
                     secondPlayer.active = true;
 
                 } else if (object.active && secondPlayer.active) {
+
                     object.gridBox.innerHTML = `<img src="${secondPlayer.symbol}"/>`;
                     object.active = false;
                     object.value = 0;
-
                     firstPlayer.active = true;
                     secondPlayer.active = false;
                 }
@@ -117,26 +120,27 @@ function playGame(players){
 
 function refreshTurn() {
     if (firstPlayer.active) {
-        player1Card.style.border = '3px solid #07bed6';
-        player2Card.style.border = '3px solid var(--transparent)';
+        firstPlayerSection.style.backgroundColor = green;
+
     } else {
-        player1Card.style.border = '3px solid var(--transparent)';
+        firstPlayerSection.style.backgroundColor = 'var(--main-white)';
     }
     
     if (secondPlayer.active) {
-        player2Card.style.border = '3px solid #C43D27';
-        player1Card.style.border = '3px solid var(--transparent)'
+        secondPlayerSection.style.backgroundColor = green;
+
     } else {
-        player2Card.style.border = '3px solid var(--transparent)'
+        secondPlayerSection.style.backgroundColor = 'var(--main-white)';
     }
 }
 
-function showWinner(string) {
-    winDialContainer.innerHTML = `<h2>${string}</h2>`;
-    winDialog.showModal();
-}
 
 function checkWinner() {
+    
+    const showWinner = (string) => {
+        winDialContainer.innerHTML = `<h2>${string}</h2>`;
+        winDialog.showModal();
+    }
 
     const checkDraw = () => {
         
@@ -155,6 +159,9 @@ function checkWinner() {
 
     }
 
+    // function that controls if a line of a matrix is winning.
+    // if the sum of a line is 3 the first player has won,
+    // otherwise if the sum is 0 the second player has won.
     const controllMatrix = (matrix) => {
         
         matrix.forEach((line) => {
@@ -175,7 +182,7 @@ function checkWinner() {
 
         });
         
-        }
+    }
                 
         const allColumns = [
                             [boardMatrix[0][0], boardMatrix[1][0], boardMatrix[2][0]],
