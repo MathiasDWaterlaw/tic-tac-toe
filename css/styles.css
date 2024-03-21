@@ -38,6 +38,7 @@ body{
     border-radius: 13.5px;
     padding: 1rem;
     background-color: var(--main-white);
+    width: 230px;
 }
 
 .player-card {
