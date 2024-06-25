@@ -16,5 +16,6 @@ If the sum of the numbers on one of the 8 winning lines is 3 the first player wi
 In the event that the program is unable to determine any winner, the program will try to add all the 9 boxes of the grid, 
 if the result is 4 or 5 the game is a draw.
 
-In future projects I will have to improve the naming of variables, classes and ids, 
-and focus on organizing the work better so as to make the files less confusing when looking at them.
+In future projects I will have to improve the naming of variables, classes and ids, and focus on organizing the work better so as to make the files less confusing when looking at them.
+
+Future changes will come. 
